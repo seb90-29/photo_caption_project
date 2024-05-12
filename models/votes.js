@@ -58,4 +58,4 @@ module.exports = (sequelize, DataTypes) => {
         modelName: 'Votes'
     })
     return Votes
-};
+}

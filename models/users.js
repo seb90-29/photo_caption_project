@@ -1,25 +1,26 @@
-const {Model} = require('sequelize')
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         static associate(models) {
             User.hasMany(models.Picture, {
-                    foreignKey: 'user_id',
-                    as: 'pictures',
-                    onDelete: 'CASCADE'
-                }),
-                User.hasMany(models.Caption, {
-                    foreignKey: 'user_id',
-                    as: 'captions',
-                    onDelete: 'CASCADE'
-                }),
-                User.hasMany(models.Votes, {
-                    foreignKey: 'user_id',
-                    as: 'votes',
-                    onDelete: 'CASCADE'
-                })
+                foreignKey: 'user_id',
+                as: 'pictures',
+                onDelete: 'CASCADE'
+            });
+            User.hasMany(models.Caption, {
+                foreignKey: 'user_id',
+                as: 'captions',
+                onDelete: 'CASCADE'
+            });
+            User.hasMany(models.Votes, {
+                foreignKey: 'user_id',
+                as: 'votes',
+                onDelete: 'CASCADE'
+            });
         }
     }
+
     User.init({
         uuid: {
             type: DataTypes.UUID,
@@ -112,6 +113,10 @@ module.exports = (sequelize, DataTypes) => {
                 }
             }
         },
-    })
-    return User
+    }, {
+        sequelize,
+        modelName: 'User'
+    });
+
+    return User;
 };

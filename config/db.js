@@ -1,11 +1,16 @@
-const Sequelize = require('sequelize')
+const { Sequelize } = require('sequelize')
 
-const db = new Sequelize('photo_caption_server', 'postgres', 'postgres', {
-    host: 'localhost',
-    dialect: 'postgres'
-  })
 
-  module.exports = {
-    Sequelize,
-    db
-  }
+const sequelize = new Sequelize({
+  dialect: 'postgres',
+  host: 'localhost',
+  username: 'postgres',
+  password: 'postgres',
+  database: 'photo_caption_server',
+  logging: console.log
+})
+
+module.exports = {
+  Sequelize,
+  sequelize,
+}

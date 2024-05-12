@@ -5,15 +5,19 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const path = require('path')
 const cors = require('cors')
-const { Sequelize, db } = require('./config/db')
-
+const { Sequelize, sequelize } = require('./config/db')
+const routes = require('./routes/api')
 module.exports = app
+
+app.use(express.json())
+
+app.use('/', routes)
 
 const PORT = process.env.PORT || 3001
 
 
 //test DB
-db.authenticate()
+sequelize.authenticate()
   .then(() => console.log('Database connected'))
   .catch(err => console.log('DB error', err))
 
